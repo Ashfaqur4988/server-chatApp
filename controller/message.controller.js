@@ -1,3 +1,4 @@
+import { getReceiverSocketId, io } from "../socket/socket.js";
 import prisma from "../util/prisma.js";
 
 export const sendMessage = async (req, res) => {
@@ -49,6 +50,10 @@ export const sendMessage = async (req, res) => {
   }
 
   //socket io will go here
+  const receiverSocketId = getReceiverSocketId(receiverId);
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("newMessage", newMessage);
+  }
 
   res.status(201).json(newMessage);
   try {
@@ -109,6 +114,6 @@ export const getUsersForSidebar = async (req, res) => {
     console.log(error);
     res
       .status(500)
-      .json({ message: "cannot get user conversations for sidebar" });
+      .json({ error: "cannot get user conversations for sidebar" });
   }
 };

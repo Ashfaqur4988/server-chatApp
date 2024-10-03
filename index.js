@@ -4,9 +4,10 @@ import authRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
 import cors from "cors";
 import dotenv from "dotenv";
+import { app, server } from "./socket/socket.js";
 dotenv.config();
 
-const app = express();
+const port = process.env.PORT || 8080;
 
 app.use(
   cors({
@@ -20,8 +21,8 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 app.use("/api/messages", messageRoute);
 
-app.listen(8080, () => {
-  console.log("server running on port 8080");
+server.listen(port, () => {
+  console.log("server running on port ", port);
 });
 
 // TODO:add socket.io to the ag-charts-format-sub-level-group-container

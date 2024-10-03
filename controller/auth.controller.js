@@ -41,7 +41,7 @@ export const signUp = async (req, res) => {
       email: newUser.email,
       profilePic: newUser.profilePic,
     });
-    console.log("signup api");
+    // console.log("signup api");
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Cannot register user" });
@@ -73,7 +73,7 @@ export const login = async (req, res) => {
       profilePic: user.profilePic,
       email: user.email,
     });
-    console.log("login api");
+    // console.log("login api");
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Cannot login user" });
@@ -83,7 +83,7 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   try {
     res.clearCookie("token").status(201).json({ message: "user logout" });
-    console.log("logout api");
+    // console.log("logout api");
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Cannot logout user" });
